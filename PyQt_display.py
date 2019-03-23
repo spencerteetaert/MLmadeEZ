@@ -9,7 +9,6 @@ class Window():
     def __init__(self):
         self.app = QApplication(sys.argv)
         self.screen = QWidget()
-        
 
     def show(self):
         self.screen.show()
