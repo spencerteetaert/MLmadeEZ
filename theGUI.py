@@ -1,20 +1,38 @@
 import sys
 from os import path
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QFileDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QFileDialog, QPushButton
 from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QIcon
 
 
+
+
 class Window():
 
-    def __init__(self):
+    def __init__(self, dataStore):
         self.app = QApplication(sys.argv)
         self.mainWidget = QWidget()
-        
+        self.init_ui()
+        self.dataStore = dataStore
+    
+    def init_ui(self):
+        # Import .txt data Button
+        data_in_button = Button("Import Data", self.mainWidget)
+        data_in_button.move(20, 20)
+        data_in_button.clicked.connect(self.upload_file)
+        go = Button("GO", self.mainWidget)
+        go.resize(100,100)
+        go.move(500, 500)
+        go.clicked.connect(self.pr)
+        return True
+
+    def pr(self):
+        print(self.dataStore.importedFilePath)
+
     def fetch_widget(self):
         return self.app
 
-    def show(self):
+    def run(self):
         self.mainWidget.show()
         sys.exit(self.app.exec_())
         return True
@@ -36,33 +54,61 @@ class Window():
         self.mainWidget.setWindowIcon(QIcon(icon_path))
         return True
 
-
-class UserInput():
-
-    def __init__(self, fileIn):
-        self.fileIn = fileIn  # fileIn should be of type .txt
-        if not self.fileIn.lower.endswith(".txt"):
-            raise TypeError("fileIn should be a file of type: .txt")
+    def upload_file(self):  
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fileName, _ = QFileDialog.getOpenFileName(None,"QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
+        if fileName:
+            UserFileInput(fileName, self.dataStore)
+        return True
     
-    def fetch_file(self):
-        return self.fileIn
-    
-class Button():
+
+class UserFileInput():
+
+    def __init__(self, ImportedFile, dataStore):
+        self.importedFile = ImportedFile  # fileIn should be of type .txt
+        if not self.importedFile.lower().endswith(".txt"):
+            raise TypeError("Imported file should be a file of type: .txt")
+        else:
+            dataStore.update_imported_file_path(self.importedFile)
+
+class Button(QPushButton):
+
+    def __init__(self, title, parentWidget):
+        super().__init__(title, parentWidget)
+
+class DataStorage:
 
     def __init__(self):
-        
+        self.importedFilePath = None  # path to .txt file
+        self.layers = None
+        self.nodes = None
+        self.learningRate = None
 
-
+    def update_imported_file_path(self, filePath):
+        self.importedFilePath = filePath
+        return True
     
+    def update_layers(self, numberOfLayer):
+        self.layers = numberOfLayer
+        return True
+    
+    def update_nodes(self, numberOfNodes):
+        self.nodes = numberOfNodes
+        return True
+    
+    def update_learning_rate(self, learningRateValue):
+        self.learningRate = learningRateValue
+        return True
 
-def gui_window():
-    windowObj = Window()
+
+def gui_setup():
+    dataStore = DataStorage()
+    windowObj = Window(dataStore)
     windowObj.mainWidget_title("Demo")  # page_title
     windowObj.mainWidget_geometry(500, 100, 800, 800)  # openning page dimensions
     icon_path = "bin\images\python.png"
     if path.exists(icon_path):
         windowObj.mainWidget_window_icon(icon_path)
-    
-    
     
     return windowObj
