@@ -92,6 +92,11 @@ dataset = import_data()
 n_inputs = len(dataset[0][0]) - 1
 n_outputs = len(set([row[-1] for row in dataset[0]]))
 network = initialize_network(n_inputs, 2, n_outputs)
-train_network(network, dataset[0], 0.1, 50, n_outputs)
-for layer in network:
-	print(layer)
+train_network(network, dataset[0], 0.1, 100, n_outputs)
+
+topGuess = [0, 0] #[index, cerrtainty]
+for i in range(0, len(network[len(network) - 1])):
+	if (network[len(network)-1][i]['output'] > topGuess[1]):
+		topGuess = [0, network[len(network)-1][i]['output']]
+
+print(topGuess)
