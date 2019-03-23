@@ -1,6 +1,7 @@
 import random
 import math
 import numpy
+import scikit
 
 class NeuralNetwork:
 	######################
@@ -72,26 +73,32 @@ class NeuralNetwork:
 	def sigmoid(self, x):
 		return (1/(1+math.exp(-1*x)))
 
-	def re_value(self, x):
+	def forward_propagate(self, x):
 		for i in range(0, len(x), 1):
 			self.values[0][i] = x[i]
 
-		for i in range(1, self.layers, 1):
-			for j in range(0, len(self.weights[1][i]), 1):
+		for layer in range(1, self.layers, 1):
+			for node in range(0, len(self.weights[1][layer]), 1):
 				accum = 0
-				for k in range(0, len(self.weights[1][i-1]), 1):
-					accum += self.values[i-1][k] * self.weights[1][i][j][k]
-				self.values[i][j] = self.sigmoid(accum)
+				for pastNode in range(0, len(self.weights[1][layer-1]), 1):
+					accum += self.values[layer-1][pastNode] * self.weights[1][layer][node][pastNode]
+				self.values[layer][node] = self.sigmoid(accum)
 		return True
 
-	def get_cost(self, x):
+	def get_cost(self, expected):
 		cost = 0
-		for i in range(0, len(x), 1):
-			cost += (x[i] - self.values[self.layers - 1][i])*transfer_derivative(self.values[self.layers - 1][i])
+		output = self.values[self.layers - 1]
+		for i in range(0, len(expected), 1):
+			cost += (expected[i] - output[i])*transfer_derivative(output[i])
 		return cost
 
 	def transfer_derivative(self, output):
 		return output * (1 - output)
+
+	def back_propagate_error(self, x):
+		#Start w output, calc error ()
+		for layer in range(len(self.weights[0]), -1, -1):
+			return True
 
 	#####################
 	### Gets and Sets ###
