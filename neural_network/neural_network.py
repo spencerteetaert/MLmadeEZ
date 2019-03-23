@@ -14,27 +14,27 @@ class NeuralNetwork:
 		self.values = []
 
 		#For each layer
-		for i in range(0, self.layers, 1): 
+		for layer in range(0, self.layers, 1): 
 			l_valToAdd = []
 			lf_weightToAdd = []
 			#For each node + 1 bias 
-			for j in range(0, initConditions[i + 1] + 1):
-				if (j < initConditions[i + 1]):
+			for node in range(0, initConditions[layer + 1] + 1):
+				if (node < initConditions[layer + 1]):
 					#Adding 0's to every node except bias
 					l_valToAdd += [0]
 				else:
 					l_valToAdd += [1]
 
 				nf_weightToAdd = []
-				if (i + 1 < self.layers):
+				if (layer + 1 < self.layers):
 					#If the next layer exists, generate weights to
-					for k in range(0, initConditions[i + 2] + 1):
+					for nextNode in range(0, initConditions[layer + 2] + 1):
 						ranWeight = random.randint(-100, 100)/100
 						nf_weightToAdd += [ranWeight]
 					lf_weightToAdd += [nf_weightToAdd]
 				else:
 					#If this is last layer, add empty (for indexing)
-					for k in range(0, initConditions[i + 1] + 1):
+					for nextNode in range(0, initConditions[layer + 1] + 1):
 						nf_weightToAdd += []
 					lf_weightToAdd += [nf_weightToAdd]
 
@@ -46,17 +46,17 @@ class NeuralNetwork:
 		self.create_back_path(initConditions)
 
 	def create_back_path(self, initConditions):
-		for i in range(0, self.layers, 1):
+		for layer in range(0, self.layers, 1):
 			lb_weightToAdd = []
 
-			for j in range(0, initConditions[i + 1] + 1):
+			for nextNode in range(0, initConditions[layer + 1] + 1):
 				nb_weightToAdd = []
-				if (i >= 1):
-					for k in range(0, initConditions[i] + 1):
+				if (layer >= 1):
+					for node in range(0, initConditions[layer] + 1):
 						#Fetches
-						nb_weightToAdd += [self.weights[0][i-1][k][j]]
+						nb_weightToAdd += [self.weights[0][layer-1][node][nextNode]]
 				else:
-					for k in range(0, initConditions[i + 1] + 1):
+					for node in range(0, initConditions[layer + 1] + 1):
 						nb_weightToAdd += []
 				lb_weightToAdd += [nb_weightToAdd]
 
