@@ -19,7 +19,7 @@ class NeuralNetwork:
 			lf_weightToAdd = []
 			#For each node + 1 bias 
 			for j in range(0, initConditions[i + 1] + 1):
-				if (j < initConditions[i + 1] + 1):
+				if (j < initConditions[i + 1]):
 					#Adding 0's to every node except bias
 					l_valToAdd += [0]
 				else:
@@ -60,3 +60,28 @@ class NeuralNetwork:
 				self.weights[1] += [lb_weightToAdd]
 
 		return True
+
+	##################
+	### Operations ###
+	##################
+
+	def sigmoid(self, value):
+		return (1/(1+math.exp(-1*val)))
+
+	def re_value(self, x):
+		for i in range(0, len(x), 1):
+			self.values[0][i] = u[i]
+
+		for i in range(1, self.layers, 1):
+			for j in range(0, len(self.weights[1][i]), 1):
+				accum = 0
+				for k in range(0, len(self.weights[1][i-1]), 1):
+					accum += self.values[i-1][k] * self.weights[1][i][j][k]
+				self.values[i][j] = self.sigmoid(accum)
+		return True
+
+	def get_cost(self, u):
+		cost = 0
+		for i in range(0, len(u), 1):
+			cost += (u[i] - self.values[self.layers - 1][i])**2
+		return cost
