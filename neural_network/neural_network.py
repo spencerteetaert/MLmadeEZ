@@ -69,12 +69,12 @@ class NeuralNetwork:
 	### Operations ###
 	##################
 
-	def sigmoid(self, value):
-		return (1/(1+math.exp(-1*val)))
+	def sigmoid(self, x):
+		return (1/(1+math.exp(-1*x)))
 
 	def re_value(self, x):
 		for i in range(0, len(x), 1):
-			self.values[0][i] = u[i]
+			self.values[0][i] = x[i]
 
 		for i in range(1, self.layers, 1):
 			for j in range(0, len(self.weights[1][i]), 1):
@@ -84,11 +84,14 @@ class NeuralNetwork:
 				self.values[i][j] = self.sigmoid(accum)
 		return True
 
-	def get_cost(self, u):
+	def get_cost(self, x):
 		cost = 0
-		for i in range(0, len(u), 1):
-			cost += (u[i] - self.values[self.layers - 1][i])**2
+		for i in range(0, len(x), 1):
+			cost += (x[i] - self.values[self.layers - 1][i])*transfer_derivative(self.values[self.layers - 1][i])
 		return cost
+
+	def transfer_derivative(self, output):
+		return output * (1 - output)
 
 	#####################
 	### Gets and Sets ###
