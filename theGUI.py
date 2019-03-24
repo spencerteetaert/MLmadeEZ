@@ -44,7 +44,12 @@ class Window():
         go.resize(100,100)
         go.move(190, 190)
         go.clicked.connect(self.go_time)
-        #textLayer, result1 = QInputDialog.getText(self.mainWidget, "Input Layers", "Input Laybers")
+        
+        self.test_data = Button("Test", self.mainWidget)
+        self.test_data.move(10, 260)
+        self.test_data.clicked.connect(self.test_inputs)
+
+        
 
         return True
 
@@ -114,6 +119,12 @@ class Window():
         nn.bridge(self.dataStore)
         return True
 
+    def test_inputs(self):
+        textLayer, results = QInputDialog.getText(self.mainWidget, "Test Inputs", "Input Layers")
+        if results:
+            print(textLayer)
+
+
 
 class UserFileInput():
 
@@ -133,7 +144,7 @@ class DataStorage:
 
     def __init__(self):
         self.importedFilePath = None  # path to .txt file
-        self.ephoch = None
+        self.epochs = None
         self.nodes = None
         self.learningRate = None
 
@@ -141,8 +152,8 @@ class DataStorage:
         self.importedFilePath = filePath
         return True
     
-    def update_layers(self, numberOfLayer):
-        self.layers = numberOfLayer
+    def update_epoch(self, numberOfLayer):
+        self.epochs = numberOfLayer
         return True
     
     def update_nodes(self, numberOfNodes):
