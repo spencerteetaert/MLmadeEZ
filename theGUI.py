@@ -44,8 +44,6 @@ class Window():
         go.resize(100,100)
         go.move(190, 190)
         go.clicked.connect(self.go_time)
-
-        network_finished = 
         #textLayer, result1 = QInputDialog.getText(self.mainWidget, "Input Layers", "Input Laybers")
 
         return True
