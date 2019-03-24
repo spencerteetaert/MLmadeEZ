@@ -116,7 +116,7 @@ def bridge(globalSettings):
 			if outputs[j] > current[0]:
 				current = [outputs[j], j]
 		#print(testDataSet[1][testDataSet[0][i][len(testDataSet[0][i])-1]], testDataSet[1][current[1]])
-		if (testDataSet[1][testDataSet[0][i][len(testDataSet[0][i])-1]] == testDataSet[1][current[1]]):
+		if (trainingData[1][testDataSet[0][i][len(testDataSet[0][i])-1]] == trainingData[1][current[1]]):
 			count = count + 1
 
 	print("Epochs:", epochs)
