@@ -124,4 +124,4 @@ def bridge(globalSettings):
 	print("Learning rate:", globalSettings.learningRate)
 	print(round(count/len(testDataSet[0])*100, 2), "% success rate")
 
-	#return network
+	return network
