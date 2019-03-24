@@ -95,14 +95,18 @@ class Window():
         return True
     
     def update_nodes(self):
-        nodesByLayerStr = list(self.numNodes.text())
-        nodesByLayer = []
-        for i in range(0, len(nodesByLayerStr), 1):
-            if not nodesByLayerStr[i].isnumeric():
-                continue
-            nodesByLayer = int(nodesByLayerStr[i])
-        self.dataStore.nodes = nodesByLayer
+        try:
+            self.dataStore.nodes = int(self.numNodes.text())
+        else:
+            return False
         return True
+        #nodesByLayer = []
+        #for i in range(0, len(nodesByLayerStr), 1):
+        #    if not nodesByLayerStr[i].isnumeric():
+        #        continue
+        #    nodesByLayer += int(nodesByLayerStr[i])
+        #self.dataStore.nodes = nodesByLayer
+        #return True
 
     def update_learning_rate(self):
         try:
