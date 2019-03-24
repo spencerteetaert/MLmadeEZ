@@ -112,13 +112,7 @@ def bridge(globalSettings):
 	testDataSet = import_test_data(globalSettings.importedFilePath, trainingData[1])
 	count = 0
 	for i in range(0, len(testDataSet[0]), 1):		
-		outputs = forward_propagate(network, testDataSet[0][i])
-		current = [0, 0]
-		for j in range(0, len(outputs), 1):
-			if outputs[j] > current[0]:
-				current = [outputs[j], j]
-		print(trainingData[1][testDataSet[0][i][len(testDataSet[0][i])-1]], trainingData[1][current[1]])
-		if (trainingData[1][testDataSet[0][i][len(testDataSet[0][i])-1]] == trainingData[1][current[1]]):
+		if (trainingData[1][testDataSet[0][i][len(testDataSet[0][i])-1]] == test(network, testDataSet[0][i], trainingData)):
 			count = count + 1
 
 	print("Epochs:", globalSettings.epochs)
@@ -127,3 +121,13 @@ def bridge(globalSettings):
 	print(round(count/len(testDataSet[0])*100, 2), "% success rate")
 
 	return network
+
+def test(network, testData, trainingData):
+	outputs = forward_propagate(network, testData)
+	current = [0, 0]
+	for j in range(0, len(outputs), 1):
+		if outputs[j] > current[0]:
+			current = [outputs[j], j]
+	#print(trainingData[1][testData[len(testData)-1]], trainingData[1][current[1]])
+
+	return trainingData[1][current[1]]

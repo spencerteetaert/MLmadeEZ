@@ -8,14 +8,14 @@ def import_data(address):
 	file = open(address, "r")
 	values = file.read().split('\n')
 	# values = values[0:500]
-	shuffle(values)
+	#shuffle(values)
 
 	ret = []  # list of all elements 
 	outputs = {}  # output dict
 	count = 0  # tracking output nodes
 
 	# Returns first 50 pieces of consecutive data
-	for i in range(0, min(len(values), 500), 1):
+	for i in range(0, min(len(values), 469), 1):
 		inputElem = []
 		rowElem = values[i].split(',')
 		for j in range(1, len(rowElem) - 1, 1):
@@ -48,7 +48,7 @@ def import_test_data(address, trainingDict):
 	for i in range(0, min(len(values), 100), 1):
 		inputElem = []
 		rowElem = values[i].split(',')
-		for j in range(0, len(rowElem) - 1, 1):
+		for j in range(1, len(rowElem) - 1, 1):
 			try:
 				inputElem += [float(rowElem[j])]
 			except:
