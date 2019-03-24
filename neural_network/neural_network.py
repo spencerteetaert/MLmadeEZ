@@ -1,7 +1,7 @@
 # Code structure pulled from Jason Brownlee's neural network tutorial
 # https://machinelearningmastery.com/implement-backpropagation-algorithm-scratch-python/ 
 
-# Altered by MLmadeEZ, an IEEE NewHacks team
+# Adapted by MLmadeEZ, an IEEE NewHacks team
 from math import exp
 from random import seed
 from random import random

@@ -1,7 +1,7 @@
 import sys
 from os import path
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QFileDialog, QPushButton, QInputDialog
-from PyQt5.QtCore import QRect
+from PyQt5.QtCore import QRect, pyqtSignal
 from PyQt5.QtGui import QIcon, QIntValidator, QFont
 import PyQt5
 sys.path.insert(0, "neural_network")
@@ -37,13 +37,15 @@ class Window():
         self.numLR.move(75, 150)
         self.numLR.setPlaceholderText("learning rate (#)")
         #self.numLR.textChanged.connect(self.number_of_nodes)
-        #textLayer, result1 = QInputDialog.getText(self.mainWidget, "Input Layers", "Input Laybers")
+        
         # Final Submit Button before NN
         go = Button("GO", self.mainWidget)
         go.setFont(QFont("Helvetica", 25))
         go.resize(100,100)
         go.move(190, 190)
         go.clicked.connect(self.go_time)
+        #textLayer, result1 = QInputDialog.getText(self.mainWidget, "Input Layers", "Input Laybers")
+
         return True
 
     def run(self):
@@ -120,6 +122,8 @@ class Window():
         print(self.dataStore.epochs)
         print(self.dataStore.nodes)
         print(self.dataStore.learningRate)
+        #elif len(self.dataStore.nodes) != self.dataStore.layers:
+        #    return False
         nn.bridge(self.dataStore)
         return True
 
