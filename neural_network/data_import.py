@@ -60,5 +60,4 @@ def import_test_data(address):
 
 		ret += [inputElem + [list(outputs.values()).index(rowElem[len(rowElem) - 1])]]
 
-	print("training:",[ret] + [outputs])
 	return [ret] + [outputs]
