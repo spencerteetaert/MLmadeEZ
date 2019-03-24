@@ -1,6 +1,6 @@
 import sys
 from os import path
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QFileDialog, QPushButton, QInputDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QFileDialog, QPushButton, QInputDialog, QDialog
 from PyQt5.QtCore import QRect, pyqtSignal
 from PyQt5.QtGui import QIcon, QIntValidator, QFont
 import PyQt5
@@ -89,7 +89,7 @@ class Window():
     
     def update_epoch(self):
         self.dataStore.epochs = int(self.epochs.text())
-    
+
     def number_of_nodes(self):
         self.update_nodes()
         return True
@@ -118,15 +118,27 @@ class Window():
 
     def go_time(self):
         self.update_learning_rate()
-        if self.dataStore.importedFilePath == None: #or self.dataStore.epochs == None or self.dataStore.nodes == None or self.dataStore.learningRate == None:
+        if self.dataStore.importedFilePath == None or self.dataStore.epochs == None or self.dataStore.nodes == None or self.dataStore.learningRate == None:
             return False
         nn.bridge(self.dataStore)
         return True
 
     def test_inputs(self):
         textLayer, results = QInputDialog.getText(self.mainWidget, "Test Inputs", "Input Layers")
-        if results:
-            print(textLayer)
+        strTextLayer = str(textLayer)
+        ins = []
+        for i in range(0, len(strTextLayer), 1):
+            if not strTextLayer[i].isnumeric():
+                continue
+            ins += [int(strTextLayer[i])]
+        print(ins)
+        to_user = nn.test_bridge(ins)
+        if to_user:
+            out = QWidget()
+            appear = QDialog(out)
+            text = QLabel(out)
+            text.setText(to_user)
+        return True
 
 
 
