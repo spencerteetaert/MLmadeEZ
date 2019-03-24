@@ -25,11 +25,11 @@ def import_data(address, start):
 					inputElem += [float(rowElem[j])]
 					#print("input: #",inputElem[-1])
 				except:
-					#print("none float found")
 					continue
 
-			ret += [inputElem + [count-1]]
-			print(ret[-1])
+			ret += [inputElem + [list(outputs.values()).index(rowElem[len(rowElem) - 1])]]
+
+		print([ret] + [outputs])
 		return [ret] + [outputs]
 
 	#biases = find_max_min(values)
@@ -51,40 +51,9 @@ def import_data(address, start):
 				#print("none float found")
 				continue
 
-		ret += [inputElem + [count-1]]
+		ret += [inputElem + [list(outputs.values()).index(rowElem[len(rowElem) - 1])]]
 
 	#print(ret)
+	print([ret] + [outputs])
 	return [ret] + [outputs]
 	#print(values)
-
-def find_max_min(value):
-	values = list(value)
-	minMax = [100000000,-1000000000]
-	for j in range(0, len(values), 1):
-		inputElem = []
-		rowElem = values[j].split(',')
-		for i in range(0, len(rowElem) - 1, 1):
-			inputElem = convert_to_usable_number(rowElem[i])
-			if (inputElem < minMax[0]):
-				minMax[0] = inputElem
-			if(inputElem > minMax[1]):
-				minMax[1] = inputElem
-
-	a = (-1*numpy.log(0.111111111)*numpy.log(81))/(minMax[1]*numpy.log(9) - minMax[0]*numpy.log(0.11111111))
-	b = (minMax[1]*numpy.log(9)-minMax[0]*numpy.log(0.111111111))/numpy.log(81)
-	print(minMax)
-	print([a,b])
-	return [a,b]
-
-def convert_to_usable_number(value):
-	ret = 0
-	j = 0
-	for i in value:
-		ret += ord(i)**(j)
-		j += 1
-	print("usable #:",ret)
-	return ret
-
-# Transfer neuron activation
-def transfer(activation, biases):
-	return 10 / (1.0 + exp(-biases[0]*(activation - biases[1])))
