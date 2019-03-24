@@ -88,16 +88,19 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
 			update_weights(network, row, l_rate)
 		#print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, l_rate, sum_error))
  
-def bridge(address):
+def bridge(globalSettings):
 	# Test training backprop algorithm
+	globalSettings.learningRate = 0.2
+	globalSettings.nodes = 5
+
 	print("Network is training...")
 	seed(1)
-	dataset = import_data(address)
+	dataset = import_data(globalSettings.importedFilePath)
 	dataset = sample(dataset, len(dataset))
 	n_inputs = len(dataset[0][0]) - 1
 	n_outputs = len(set([row[-1] for row in dataset[0]]))
-	network = initialize_network(n_inputs, 5, n_outputs)
-	train_network(network, dataset[0], 0.1, 100, n_outputs)
+	network = initialize_network(n_inputs, globalSettings.nodes, n_outputs)
+	train_network(network, dataset[0], globalSettings.learningRate, 100, n_outputs)
 
 	# Step size
 	# network size
