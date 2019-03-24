@@ -23,11 +23,10 @@ def import_data(address, start):
 			inputElem = []
 			rowElem = values[randint(0, len(values)-1)].split(',')
 			for j in range(0, len(rowElem) - 1, 1):
-				if (j == len(rowElem)-2):
-					if not (rowElem[j+1] in outputs.values()):
-						outputs[count] = rowElem[j+1]
-						#print("new output found:",outputs[count])
-						count = count + 1
+				if (j == len(rowElem)-2):  # 2nd last element, allows you to index the last element
+					if not (rowElem[j+1] in outputs.values()):  # last element (output) is already found
+						outputs[count] = rowElem[j+1]  # add undiscovered output
+						count = count + 1  # increment output counter
 				try:
 					inputElem += [float(rowElem[j])]  # try to cast to float if possible
 				except:
