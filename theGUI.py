@@ -110,6 +110,7 @@ class Window():
     def go_time(self):
         self.update_learning_rate()
         if self.dataStore.importedFilePath == None: #or self.dataStore.epochs == None or self.dataStore.nodes == None or self.dataStore.learningRate == None:
+            return False
         nn.bridge(self.dataStore)
         return True
 
