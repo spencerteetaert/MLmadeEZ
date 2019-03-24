@@ -16,8 +16,6 @@ def initialize_network(n_inputs, n_hidden, n_outputs):
 	network.append(hidden_layer)
 	output_layer = [{'weights':[random() for i in range(n_hidden + 1)]} for i in range(n_outputs)]
 	network.append(output_layer)
-
-	print(network)
 	return network
  
 # Calculate neuron activation for an input
@@ -79,7 +77,9 @@ def update_weights(network, row, l_rate):
  
 # Train a network for a fixed number of epochs
 def train_network(network, train, l_rate, n_epoch, n_outputs):
+	sizeOfSubset = len(train)//n_epoch
 	for epoch in range(n_epoch):
+		dataset = list(train[epoch*sizeOfSubset:epoch*sizeOfSubset+sizeOfSubset])
 		sum_error = 0
 		for row in train:
 			outputs = forward_propagate(network, row)
@@ -94,9 +94,9 @@ def bridge(globalSettings):
 	# Test training backprop algorithm
 	# globalSettings.learningRate = 0.2
 	# globalSettings.nodes = 2
-	epochs = 500
 
 	print("Network is training...")
+	print(globalSettings.nodes)
 	#seed(1)
 
 	trainingData = import_data(globalSettings.importedFilePath)
@@ -105,9 +105,10 @@ def bridge(globalSettings):
 	network = initialize_network(n_inputs, globalSettings.nodes, n_outputs)
 	train_network(network, trainingData[0], globalSettings.learningRate, globalSettings.epochs, n_outputs)	
 	print("Network training success")
+	print(network)
 
 	#print("dataset:",dataset)
-	testDataSet = import_test_data(globalSettings.importedFilePath)
+	testDataSet = import_test_data(globalSettings.importedFilePath, trainingData[1])
 	count = 0
 	for i in range(0, len(testDataSet[0]), 1):		
 		outputs = forward_propagate(network, testDataSet[0][i])
@@ -115,11 +116,11 @@ def bridge(globalSettings):
 		for j in range(0, len(outputs), 1):
 			if outputs[j] > current[0]:
 				current = [outputs[j], j]
-		#print(testDataSet[1][testDataSet[0][i][len(testDataSet[0][i])-1]], testDataSet[1][current[1]])
+		print(trainingData[1][testDataSet[0][i][len(testDataSet[0][i])-1]], trainingData[1][current[1]])
 		if (trainingData[1][testDataSet[0][i][len(testDataSet[0][i])-1]] == trainingData[1][current[1]]):
 			count = count + 1
 
-	print("Epochs:", epochs)
+	print("Epochs:", globalSettings.epochs)
 	print("Hidden nodes:", globalSettings.nodes)
 	print("Learning rate:", globalSettings.learningRate)
 	print(round(count/len(testDataSet[0])*100, 2), "% success rate")
