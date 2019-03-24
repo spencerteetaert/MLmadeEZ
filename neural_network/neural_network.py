@@ -88,7 +88,7 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
 			update_weights(network, row, l_rate)
 		#print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, l_rate, sum_error))
  
-def bridge():
+def bridge(globalSettings):
 	# Test training backprop algorithm
 	globalSettings.importedFilePath = 'iris.data.txt'
 	globalSettings.learningRate = 0.2
