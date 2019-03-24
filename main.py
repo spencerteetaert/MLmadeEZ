@@ -1,10 +1,8 @@
-from theGUI import gui_window
+from theGUI import gui_setup
 
 def main():
-    windowObj = gui_window()
-    windowObj.show()
-    
-
+    windowObj = gui_setup()
+    windowObj.run()
     return True
 
 main()
