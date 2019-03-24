@@ -127,20 +127,18 @@ class Window():
         textLayer, results = QInputDialog.getText(self.mainWidget, "Test Inputs", "Input Layers")
         strTextLayer = str(textLayer)
         ins = []
-        for i in range(0, len(strTextLayer), 1):
-            if not strTextLayer[i].isnumeric():
-                continue
-            ins += [int(strTextLayer[i])]
+        ins = list(strTextLayer.split(','))
+        for i in range(len(ins)):
+            ins[i] = float(ins[i])
+        
         print(ins)
         to_user = nn.test_bridge(ins)
         if to_user:
-            out = QWidget()
+            out = QWidget(self.mainWidget)
             appear = QDialog(out)
             text = QLabel(out)
             text.setText(to_user)
         return True
-
-
 
 class UserFileInput():
 
