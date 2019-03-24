@@ -3,8 +3,8 @@ from os import path
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QFileDialog, QPushButton
 from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QIcon
-
-
+sys.path.insert(0, "neural_network")
+import neural_network as nn
 
 
 class Window():
@@ -23,11 +23,13 @@ class Window():
         go = Button("GO", self.mainWidget)
         go.resize(100,100)
         go.move(500, 500)
-        go.clicked.connect(self.pr)
+        go.clicked.connect(self.go_time)
         return True
 
-    def pr(self):
-        print(self.dataStore.importedFilePath)
+    def go_time(self):
+        nn.bridge(self.dataStore)
+        return True
+
 
     def fetch_widget(self):
         return self.app
@@ -100,7 +102,6 @@ class DataStorage:
     def update_learning_rate(self, learningRateValue):
         self.learningRate = learningRateValue
         return True
-
 
 def gui_setup():
     dataStore = DataStorage()
