@@ -22,11 +22,11 @@ class Window():
         self.DataInButton.clicked.connect(self.upload_file)
         
         #Layers Input
-        self.numLayers = QLineEdit(self.mainWidget)
-        self.numLayers.setValidator(QIntValidator())
-        self.numLayers.move(75, 100)
-        self.numLayers.setPlaceholderText("# of hidden layers")
-        self.numLayers.textChanged.connect(self.number_of_layers)
+        self.epochs = QLineEdit(self.mainWidget)
+        self.epochs.setValidator(QIntValidator())
+        self.epochs.move(75, 100)
+        self.epochs.setPlaceholderText("# of epochs")
+        self.epochs.textChanged.connect(self.number_of_layers)
         #Nodes Per Lay
         self.numNodes = QLineEdit(self.mainWidget)
         self.numNodes.move(75, 125)
@@ -81,7 +81,7 @@ class Window():
         return True
     
     def update_layers(self):
-        self.dataStore.layers = int(self.numLayers.text())
+        self.dataStore.epochs = int(self.epochs.text())
     
     def number_of_nodes(self):
         self.update_nodes()
@@ -93,7 +93,7 @@ class Window():
         for i in range(0, len(nodesByLayerStr), 1):
             if not nodesByLayerStr[i].isnumeric():
                 continue
-            nodesByLayer += [int(nodesByLayerStr[i])]
+            nodesByLayer = int(nodesByLayerStr[i])
         self.dataStore.nodes = nodesByLayer
         return True
 
@@ -107,17 +107,17 @@ class Window():
 
     def go_time(self):
         self.update_learning_rate()
-        if self.dataStore.importedFilePath == None: #or self.dataStore.layers == None or self.dataStore.nodes == None or self.dataStore.learningRate == None:
+        if self.dataStore.importedFilePath == None: #or self.dataStore.epochs == None or self.dataStore.nodes == None or self.dataStore.learningRate == None:
             return False
 
-        #elif len(self.dataStore.nodes) != self.dataStore.layers:
+        #elif len(self.dataStore.nodes) != self.dataStore.epochs:
         #    return False
 
-        # elif len(self.dataStore.nodes) != self.dataStore.layers:
+        # elif len(self.dataStore.nodes) != self.dataStore.epochs:
         #     return False
 
         print(self.dataStore.importedFilePath)
-        print(self.dataStore.layers)
+        print(self.dataStore.epochs)
         print(self.dataStore.nodes)
         print(self.dataStore.learningRate)
         nn.bridge(self.dataStore)

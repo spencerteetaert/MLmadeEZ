@@ -7,7 +7,7 @@ from random import seed
 from random import random
 from random import sample
 from random import randint
-from data_import import import_data
+from data_import import *
  
 # Initialize a network
 def initialize_network(n_inputs, n_hidden, n_outputs):
@@ -16,6 +16,8 @@ def initialize_network(n_inputs, n_hidden, n_outputs):
 	network.append(hidden_layer)
 	output_layer = [{'weights':[random() for i in range(n_hidden + 1)]} for i in range(n_outputs)]
 	network.append(output_layer)
+
+	print(network)
 	return network
  
 # Calculate neuron activation for an input
@@ -90,39 +92,36 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
  
 def bridge(globalSettings):
 	# Test training backprop algorithm
-	globalSettings.learningRate = 0.2
-	globalSettings.nodes = 2
+	# globalSettings.learningRate = 0.2
+	# globalSettings.nodes = 2
 	epochs = 500
-
-	# 4 x n + n x 
 
 	print("Network is training...")
 	#seed(1)
 
-	dataset = import_data(globalSettings.importedFilePath)
-	n_inputs = len(dataset[0][0]) - 1
-	n_outputs = len(set([row[-1] for row in dataset[0]]))
+	trainingData = import_data(globalSettings.importedFilePath)
+	n_inputs = len(trainingData[0][0]) - 1
+	n_outputs = len(set([row[-1] for row in trainingData[0]]))
 	network = initialize_network(n_inputs, globalSettings.nodes, n_outputs)
-	train_network(network, dataset[0], globalSettings.learningRate, epochs, n_outputs)	
+	train_network(network, trainingData[0], globalSettings.learningRate, globalSettings.epochs, n_outputs)	
 	print("Network training success")
 
 	#print("dataset:",dataset)
+	testDataSet = import_test_data(globalSettings.importedFilePath)
 	count = 0
-	for i in range(0, len(dataset[0]), 1):		
-		outputs = forward_propagate(network, dataset[0][i])
+	for i in range(0, len(testDataSet[0]), 1):		
+		outputs = forward_propagate(network, testDataSet[0][i])
 		current = [0, 0]
 		for j in range(0, len(outputs), 1):
 			if outputs[j] > current[0]:
 				current = [outputs[j], j]
-		#print(dataset[1][dataset[0][i][len(dataset[0][i])-1]], dataset[1][current[1]])
-		if (dataset[1][dataset[0][i][len(dataset[0][i])-1]] == dataset[1][current[1]]):
+		#print(testDataSet[1][testDataSet[0][i][len(testDataSet[0][i])-1]], testDataSet[1][current[1]])
+		if (testDataSet[1][testDataSet[0][i][len(testDataSet[0][i])-1]] == testDataSet[1][current[1]]):
 			count = count + 1
+
 	print("Epochs:", epochs)
 	print("Hidden nodes:", globalSettings.nodes)
 	print("Learning rate:", globalSettings.learningRate)
-	print(round(count/len(dataset[0])*100, 2), "% success rate")
+	print(round(count/len(testDataSet[0])*100, 2), "% success rate")
 
-def train(globalSettings):
-
-
-	return network
+	#return network
