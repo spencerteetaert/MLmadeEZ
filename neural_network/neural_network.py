@@ -90,7 +90,6 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
  
 def bridge(globalSettings):
 	# Test training backprop algorithm
-	globalSettings.importedFilePath = 'iris.data.txt'
 	globalSettings.learningRate = 0.2
 	globalSettings.nodes = 5
 
@@ -101,7 +100,7 @@ def bridge(globalSettings):
 	n_inputs = len(dataset[0][0]) - 1
 	n_outputs = len(set([row[-1] for row in dataset[0]]))
 	network = initialize_network(n_inputs, globalSettings.nodes, n_outputs)
-	train_network(network, dataset[0], globalSettings.learningRate, 100, n_outputs)
+	train_network(network, dataset[0], globalSettings.learningRate, 50, n_outputs)
 
 	# Step size
 	# network size
