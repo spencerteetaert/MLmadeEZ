@@ -88,8 +88,9 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
 			update_weights(network, row, l_rate)
 		#print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, l_rate, sum_error))
  
-def bridge(globalSettings):
+def bridge():
 	# Test training backprop algorithm
+	globalSettings.importedFilePath = 'iris.data.txt'
 	globalSettings.learningRate = 0.2
 	globalSettings.nodes = 5
 
@@ -109,9 +110,9 @@ def bridge(globalSettings):
 	for i in range(0, len(dataset[0]), 1):		
 		outputs = forward_propagate(network, dataset[0][i])
 		current = [0, 0]
-		for i in range(0, len(outputs), 1):
-			if outputs[i] > current[0]:
-				current = [outputs[i], i]
+		for j in range(0, len(outputs), 1):
+			if outputs[j] > current[0]:
+				current = [outputs[j], j]
 		print(dataset[1][dataset[0][i][4]], dataset[1][current[1]])
 		if (dataset[1][dataset[0][i][4]] == dataset[1][current[1]]):
 			count = count + 1
