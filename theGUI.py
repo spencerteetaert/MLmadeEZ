@@ -7,9 +7,6 @@ import PyQt5
 sys.path.insert(0, "neural_network")
 import neural_network as nn
 
-def pr():
-    print("plsss")
-
 class Window():
 
     def __init__(self, dataStore):
@@ -32,9 +29,14 @@ class Window():
         self.numLayers.textChanged.connect(self.number_of_layers)
         #Nodes Per Lay
         self.numNodes = QLineEdit(self.mainWidget)
-        self.numNodes.move(75, 150)
+        self.numNodes.move(75, 125)
         self.numNodes.setPlaceholderText("# of nodes (csv)")
         self.numNodes.textChanged.connect(self.number_of_nodes)
+        #Learning Rate
+        self.numLR = QLineEdit(self.mainWidget)
+        self.numLR.move(75, 150)
+        self.numLR.setPlaceholderText("learning rate (#)")
+        #self.numLR.textChanged.connect(self.number_of_nodes)
         #textLayer, result1 = QInputDialog.getText(self.mainWidget, "Input Layers", "Input Laybers")
         # Final Submit Button before NN
         go = Button("GO", self.mainWidget)
@@ -67,7 +69,6 @@ class Window():
         return True
 
     def upload_file(self):
-        self.number_of_nodes()
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
         fileName, _ = QFileDialog.getOpenFileName(None,"QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
@@ -87,21 +88,33 @@ class Window():
         return True
     
     def update_nodes(self):
-        nodesByLayerStr = self.numNodes.text().split(",")
+        nodesByLayerStr = list(self.numNodes.text())
         nodesByLayer = []
         for i in range(0, len(nodesByLayerStr), 1):
-            print(i)
             if not nodesByLayerStr[i].isnumeric():
                 continue
-            nodesByLayer.append(int(nodesByLayerStr[i]))
+            nodesByLayer += [int(nodesByLayerStr[i])]
         self.dataStore.nodes = nodesByLayer
-        print(self.dataStore.nodes)
         return True
 
+    def update_learning_rate(self):
+        try:
+            float_value = float(self.numLR.text())
+            self.dataStore.learningRate = float_value
+        except:
+            return False
+        return True
 
     def go_time(self):
+        self.update_learning_rate()
         if self.dataStore.importedFilePath == None:# or self.dataStore.layers == None or self.dataStore.nodes == None or self.dataStore.learningRate == None:
             return False
+        elif len(self.dataStore.nodes) != self.dataStore.layers:
+            return False
+        print(self.dataStore.fileName)
+        print(self.dataStore.layers)
+        print(self.dataStore.nodes)
+        print(self.dataStore.learningRate)
         nn.bridge(self.dataStore)
         return True
 
