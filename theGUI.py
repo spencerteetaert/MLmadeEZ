@@ -133,7 +133,7 @@ class Window():
             ins += [int(strTextLayer[i])]
         print(ins)
         to_user = nn.test_bridge(ins)
-        if to_users:
+        if to_user:
             out = QWidget()
             appear = QDialog(out)
             text = QLabel(out)
