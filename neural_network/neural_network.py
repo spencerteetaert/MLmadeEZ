@@ -90,6 +90,7 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
  
 def bridge(globalSettings):
 	# Test training backprop algorithm
+
 	globalSettings.learningRate = 0.2
 	globalSettings.nodes = 2
 	epochs = 500
@@ -99,7 +100,7 @@ def bridge(globalSettings):
 	# network size
 	print("Network training success")
 
-	dataset = import_data(globalSettings.importedFilePath, True)
+	dataset = import_data(globalSettings.importedFilePath, -1)
 
 	print("dataset:",dataset)
 	count = 0
