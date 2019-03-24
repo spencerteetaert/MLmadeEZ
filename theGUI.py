@@ -26,7 +26,7 @@ class Window():
         self.epochs.setValidator(QIntValidator())
         self.epochs.move(75, 100)
         self.epochs.setPlaceholderText("# of epochs")
-        self.epochs.textChanged.connect(self.number_of_layers)
+        self.epochs.textChanged.connect(self.number_of_epoch)
         #Nodes Per Lay
         self.numNodes = QLineEdit(self.mainWidget)
         self.numNodes.move(75, 125)
@@ -78,11 +78,11 @@ class Window():
             UserFileInput(fileName, self.dataStore)
         return True
     
-    def number_of_layers(self):
-        self.update_layers()
+    def number_of_epoch(self):
+        self.update_epoch()
         return True
     
-    def update_layers(self):
+    def update_epoch(self):
         self.dataStore.epochs = int(self.epochs.text())
     
     def number_of_nodes(self):
@@ -110,20 +110,6 @@ class Window():
     def go_time(self):
         self.update_learning_rate()
         if self.dataStore.importedFilePath == None: #or self.dataStore.epochs == None or self.dataStore.nodes == None or self.dataStore.learningRate == None:
-            return False
-
-        #elif len(self.dataStore.nodes) != self.dataStore.epochs:
-        #    return False
-
-        # elif len(self.dataStore.nodes) != self.dataStore.epochs:
-        #     return False
-
-        print(self.dataStore.importedFilePath)
-        print(self.dataStore.epochs)
-        print(self.dataStore.nodes)
-        print(self.dataStore.learningRate)
-        #elif len(self.dataStore.nodes) != self.dataStore.layers:
-        #    return False
         nn.bridge(self.dataStore)
         return True
 
@@ -146,7 +132,7 @@ class DataStorage:
 
     def __init__(self):
         self.importedFilePath = None  # path to .txt file
-        self.layers = None
+        self.ephoch = None
         self.nodes = None
         self.learningRate = None
 
