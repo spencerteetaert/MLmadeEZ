@@ -1,4 +1,4 @@
-# Code taken from Jason Brownlee's neural network tutorial
+# Code structure pulled from Jason Brownlee's neural network tutorial
 # https://machinelearningmastery.com/implement-backpropagation-algorithm-scratch-python/ 
 
 # Altered by MLmadeEZ, an IEEE NewHacks team

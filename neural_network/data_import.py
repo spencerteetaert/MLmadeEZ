@@ -6,12 +6,15 @@ import numpy
 def import_data(address, start):
 	file = open(address, "r")
 	values = file.read().split('\n')
+<<<<<<< HEAD
 	ret = []
 	
 	outputs = {}
 	count = 0
 
 	if(start == -1): #Returns 100 random pieces of data
+=======
+>>>>>>> 19be8804753c1b872dbf107ae5417616ff5fd0be
 		for i in range(0, 100, 1):
 			inputElem = []
 			rowElem = values[randint(0, len(values)-1)].split(',')
@@ -22,14 +25,17 @@ def import_data(address, start):
 						#print("new output found:",outputs[count])
 						count = count + 1
 				try:
-					inputElem += [float(rowElem[j])]
-					#print("input: #",inputElem[-1])
+					inputElem += [float(rowElem[j])]  # try to cast to float if possible
 				except:
 					continue
+<<<<<<< HEAD
+			ret += [inputElem]  
+=======
 
 			ret += [inputElem + [list(outputs.values()).index(rowElem[len(rowElem) - 1])]]
 
 		print([ret] + [outputs])
+>>>>>>> 2073a3d77d102beacc1b762804adc8e2bbde70e4
 		return [ret] + [outputs]
 
 	#biases = find_max_min(values)

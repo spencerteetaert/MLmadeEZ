@@ -109,8 +109,13 @@ class Window():
         self.update_learning_rate()
         if self.dataStore.importedFilePath == None: #or self.dataStore.layers == None or self.dataStore.nodes == None or self.dataStore.learningRate == None:
             return False
+<<<<<<< HEAD
+        #elif len(self.dataStore.nodes) != self.dataStore.layers:
+        #    return False
+=======
         # elif len(self.dataStore.nodes) != self.dataStore.layers:
         #     return False
+>>>>>>> 2073a3d77d102beacc1b762804adc8e2bbde70e4
         print(self.dataStore.importedFilePath)
         print(self.dataStore.layers)
         print(self.dataStore.nodes)
