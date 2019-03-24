@@ -90,6 +90,7 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
  
 def bridge(globalSettings):
 	# Test training backprop algorithm
+
 	globalSettings.learningRate = 0.2
 	globalSettings.nodes = 2
 	epochs = 500
@@ -99,7 +100,7 @@ def bridge(globalSettings):
 	# network size
 	print("Network training success")
 
-	dataset = import_data(globalSettings.importedFilePath, True)
+	dataset = import_data(globalSettings.importedFilePath, -1)
 
 	print("dataset:",dataset)
 	count = 0
@@ -138,34 +139,3 @@ def train(globalSettings):
 		train_network(network, dataset[0], globalSettings.learningRate, epochs, n_outputs)
 
 	return network
-
-	# while True:
-	# 	rand = randint(0, 149)
-	# 	input("...")
-
-	# 	outputs = forward_propagate(network, dataset[0][rand])
-	# 	current = [0, 0]
-	# 	for i in range(0, len(outputs), 1):
-	# 		if outputs[i] > current[0]:
-	# 			current = [outputs[i], i]
-	# 	print("At data point", current[1], "desired answer:", dataset[1][dataset[0][rand][4]])
-	# 	print("Prediction:", dataset[1][current[1]], "with", round(current[0]*100, 1), "% certainty")
-	# 	if (dataset[1][dataset[0][rand][4]] == dataset[1][current[1]]):
-	# 		print("#Success")
-	# 	else:
-	# 		print("#Fail")
-
-	# while True:
-	# 	inputString = input("Enter test case:\n")
-	# 	temp = inputString.split(',')
-	# 	inputList = []
-	# 	for i in range(0, len(temp), 1):
-	# 		inputList += [float(temp[i])]
-
-	# 	outputs = forward_propagate(network, inputList)
-	# 	current = [0, 0]
-	# 	for i in range(0, len(outputs), 1):
-	# 		if outputs[i] > current[0]:
-	# 			current = [outputs[i], i]
-
-	# 	print("Prediction:", dataset[1][current[1]], "with", round(current[0]*100, 1), "% certainty\n")
