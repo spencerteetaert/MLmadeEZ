@@ -29,6 +29,7 @@ def import_data(address, start):
 					continue
 
 			ret += [inputElem + [count-1]]
+			print(ret[-1])
 		return [ret] + [outputs]
 
 	#biases = find_max_min(values)
