@@ -97,7 +97,7 @@ class Window():
     def update_nodes(self):
         try:
             self.dataStore.nodes = int(self.numNodes.text())
-        else:
+        except:
             return False
         return True
         #nodesByLayer = []

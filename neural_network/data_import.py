@@ -18,7 +18,7 @@ def import_data(address):
 	for i in range(0, min(len(values), 500), 1):
 		inputElem = []
 		rowElem = values[i].split(',')
-		for j in range(0, len(rowElem) - 1, 1):
+		for j in range(1, len(rowElem) - 1, 1):
 			if (j == len(rowElem)-2):
 				if not (rowElem[j+1] in outputs.values()):
 					outputs[count] = rowElem[j+1]
@@ -35,7 +35,7 @@ def import_data(address):
 def import_test_data(address, trainingDict):
 	file = open(address, "r")
 	values = file.read().split('\n')
-	shuffle(values)
+	#shuffle(values)
 	if (len(values) > 101):
 		values = values[len(values)-100:len(values)]
 

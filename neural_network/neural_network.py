@@ -63,6 +63,7 @@ def backward_propagate_error(network, expected):
 		for j in range(len(layer)):
 			neuron = layer[j]
 			neuron['delta'] = errors[j] * transfer_derivative(neuron['output'])
+		#print(neuron['delta'])
  
 # Update network weights with error
 def update_weights(network, row, l_rate):
@@ -78,7 +79,7 @@ def update_weights(network, row, l_rate):
 # Train a network for a fixed number of epochs
 def train_network(network, train, l_rate, n_epoch, n_outputs):
 	sizeOfSubset = len(train)//n_epoch
-	for epoch in range(n_epoch):
+	for epoch in range(n_epoch - n_epoch//10):
 		dataset = list(train[epoch*sizeOfSubset:epoch*sizeOfSubset+sizeOfSubset])
 		sum_error = 0
 		for row in train:
@@ -96,7 +97,7 @@ def bridge(globalSettings):
 	# globalSettings.nodes = 2
 
 	print("Network is training...")
-	print(globalSettings.nodes)
+	#print(globalSettings.nodes)
 	#seed(1)
 
 	trainingData = import_data(globalSettings.importedFilePath)
@@ -105,7 +106,7 @@ def bridge(globalSettings):
 	network = initialize_network(n_inputs, globalSettings.nodes, n_outputs)
 	train_network(network, trainingData[0], globalSettings.learningRate, globalSettings.epochs, n_outputs)	
 	print("Network training success")
-	print(network)
+	#print(network)
 
 	#print("dataset:",dataset)
 	testDataSet = import_test_data(globalSettings.importedFilePath, trainingData[1])
