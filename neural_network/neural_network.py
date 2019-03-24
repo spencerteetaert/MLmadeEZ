@@ -90,6 +90,7 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
  
 def bridge(globalSettings):
 	# Test training backprop algorithm
+	print("This is a test",ord('r'), ord('&'), ord('~'))
 	globalSettings.learningRate = 0.2
 	globalSettings.nodes = 5
 	epochs = 500
@@ -121,7 +122,7 @@ def bridge(globalSettings):
 	print("Epochs:", epochs)
 	print("Hidden nodes:", globalSettings.nodes)
 	print("Learning rate:", globalSettings.learningRate)
-	print(round(count/len(dataset[0])*100, 2), "% sucess rate")
+	print(round(count/len(dataset[0])*100, 2), "% success rate")
 
 	# while True:
 	# 	rand = randint(0, 149)
