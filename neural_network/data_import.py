@@ -15,7 +15,7 @@ def import_data(address):
 	count = 0  # tracking output nodes
 
 	# Returns first 50 pieces of consecutive data
-	for i in range(0, min(len(values), 469), 1):
+	for i in range(0, len(values), 1):
 		inputElem = []
 		rowElem = values[i].split(',')
 		for j in range(1, len(rowElem) - 1, 1):
