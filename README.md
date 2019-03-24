@@ -1,2 +1,2 @@
 # MLmadeEZ
-MLmadeEZ is a hackathon project geared at lowering the entrance age of machine learning. Being geared toward younger kids and students, MLmadeEZ is a user friendly, first principles approach to visualize and learn the basics of neural networks. 
+MLmadeEZ is a hackathon project aimed at giving access to machine learning to people who do not know how to code. It has a user friendly interface and currently is designed for pattern recognition. 
