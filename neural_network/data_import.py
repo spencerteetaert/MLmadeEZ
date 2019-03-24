@@ -22,14 +22,10 @@ def import_data(address, start):
 					inputElem += [float(rowElem[j])]  # try to cast to float if possible
 				except:
 					continue
-<<<<<<< HEAD
-			ret += [inputElem]  
-=======
 
 			ret += [inputElem + [list(outputs.values()).index(rowElem[len(rowElem) - 1])]]
 
 		print([ret] + [outputs])
->>>>>>> 2073a3d77d102beacc1b762804adc8e2bbde70e4
 		return [ret] + [outputs]
 
 	#biases = find_max_min(values)
