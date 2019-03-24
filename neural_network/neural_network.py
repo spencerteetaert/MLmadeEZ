@@ -88,58 +88,59 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
 			update_weights(network, row, l_rate)
 		#print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, l_rate, sum_error))
  
-# Test training backprop algorithm
-print("Network is training...")
-seed(1)
-dataset = import_data()
-dataset = sample(dataset, len(dataset))
-n_inputs = len(dataset[0][0]) - 1
-n_outputs = len(set([row[-1] for row in dataset[0]]))
-network = initialize_network(n_inputs, 5, n_outputs)
-train_network(network, dataset[0], 0.1, 100, n_outputs)
+def bridge(address):
+	# Test training backprop algorithm
+	print("Network is training...")
+	seed(1)
+	dataset = import_data(address)
+	dataset = sample(dataset, len(dataset))
+	n_inputs = len(dataset[0][0]) - 1
+	n_outputs = len(set([row[-1] for row in dataset[0]]))
+	network = initialize_network(n_inputs, 5, n_outputs)
+	train_network(network, dataset[0], 0.1, 100, n_outputs)
 
-# Step size
-# network size
+	# Step size
+	# network size
 
-count = 0
-for i in range(0, len(dataset[0]), 1):		
-	outputs = forward_propagate(network, dataset[0][i])
-	current = [0, 0]
-	for i in range(0, len(outputs), 1):
-		if outputs[i] > current[0]:
-			current = [outputs[i], i]
-	print(dataset[1][dataset[0][i][4]], dataset[1][current[1]])
-	if (dataset[1][dataset[0][i][4]] == dataset[1][current[1]]):
-		count = count + 1
-print(count/len(dataset[0])*100, "% sucess rate")
+	count = 0
+	for i in range(0, len(dataset[0]), 1):		
+		outputs = forward_propagate(network, dataset[0][i])
+		current = [0, 0]
+		for i in range(0, len(outputs), 1):
+			if outputs[i] > current[0]:
+				current = [outputs[i], i]
+		print(dataset[1][dataset[0][i][4]], dataset[1][current[1]])
+		if (dataset[1][dataset[0][i][4]] == dataset[1][current[1]]):
+			count = count + 1
+	print(count/len(dataset[0])*100, "% sucess rate")
 
-# while True:
-# 	rand = randint(0, 149)
-# 	input("...")
+	# while True:
+	# 	rand = randint(0, 149)
+	# 	input("...")
 
-# 	outputs = forward_propagate(network, dataset[0][rand])
-# 	current = [0, 0]
-# 	for i in range(0, len(outputs), 1):
-# 		if outputs[i] > current[0]:
-# 			current = [outputs[i], i]
-# 	print("At data point", current[1], "desired answer:", dataset[1][dataset[0][rand][4]])
-# 	print("Prediction:", dataset[1][current[1]], "with", round(current[0]*100, 1), "% certainty")
-# 	if (dataset[1][dataset[0][rand][4]] == dataset[1][current[1]]):
-# 		print("#Success")
-# 	else:
-# 		print("#Fail")
+	# 	outputs = forward_propagate(network, dataset[0][rand])
+	# 	current = [0, 0]
+	# 	for i in range(0, len(outputs), 1):
+	# 		if outputs[i] > current[0]:
+	# 			current = [outputs[i], i]
+	# 	print("At data point", current[1], "desired answer:", dataset[1][dataset[0][rand][4]])
+	# 	print("Prediction:", dataset[1][current[1]], "with", round(current[0]*100, 1), "% certainty")
+	# 	if (dataset[1][dataset[0][rand][4]] == dataset[1][current[1]]):
+	# 		print("#Success")
+	# 	else:
+	# 		print("#Fail")
 
-# while True:
-# 	inputString = input("Enter test case:\n")
-# 	temp = inputString.split(',')
-# 	inputList = []
-# 	for i in range(0, len(temp), 1):
-# 		inputList += [float(temp[i])]
+	# while True:
+	# 	inputString = input("Enter test case:\n")
+	# 	temp = inputString.split(',')
+	# 	inputList = []
+	# 	for i in range(0, len(temp), 1):
+	# 		inputList += [float(temp[i])]
 
-# 	outputs = forward_propagate(network, inputList)
-# 	current = [0, 0]
-# 	for i in range(0, len(outputs), 1):
-# 		if outputs[i] > current[0]:
-# 			current = [outputs[i], i]
+	# 	outputs = forward_propagate(network, inputList)
+	# 	current = [0, 0]
+	# 	for i in range(0, len(outputs), 1):
+	# 		if outputs[i] > current[0]:
+	# 			current = [outputs[i], i]
 
-# 	print("Prediction:", dataset[1][current[1]], "with", round(current[0]*100, 1), "% certainty\n")
+	# 	print("Prediction:", dataset[1][current[1]], "with", round(current[0]*100, 1), "% certainty\n")

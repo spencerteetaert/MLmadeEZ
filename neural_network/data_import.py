@@ -1,5 +1,5 @@
-def import_data():
-	file = open('iris.data.txt', "r")
+def import_data(address):
+	file = open(address, "r")
 	values = file.read().split('\n')
 	ret = []
 	
