@@ -107,11 +107,11 @@ class Window():
 
     def go_time(self):
         self.update_learning_rate()
-        if self.dataStore.importedFilePath == None:# or self.dataStore.layers == None or self.dataStore.nodes == None or self.dataStore.learningRate == None:
+        if self.dataStore.importedFilePath == None or self.dataStore.layers == None or self.dataStore.nodes == None or self.dataStore.learningRate == None:
             return False
         elif len(self.dataStore.nodes) != self.dataStore.layers:
             return False
-        print(self.dataStore.fileName)
+        print(self.dataStore.importedFilePath)
         print(self.dataStore.layers)
         print(self.dataStore.nodes)
         print(self.dataStore.learningRate)
