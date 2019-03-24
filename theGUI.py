@@ -131,13 +131,9 @@ class Window():
         for i in range(len(ins)):
             ins[i] = float(ins[i])
         
-        print(ins)
         to_user = nn.test_bridge(ins)
-        if to_user:
-            out = QWidget(self.mainWidget)
-            appear = QDialog(out)
-            text = QLabel(out)
-            text.setText(to_user)
+        print("Predicted output:",to_user)
+        print("Correct output:", ins[-1])
         return True
 
 class UserFileInput():
