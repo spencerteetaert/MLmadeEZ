@@ -1,7 +1,7 @@
 # Code structure pulled from Jason Brownlee's neural network tutorial
 # https://machinelearningmastery.com/implement-backpropagation-algorithm-scratch-python/ 
 
-# Altered by MLmadeEZ, an IEEE NewHacks team
+# Adapted by MLmadeEZ, an IEEE NewHacks team
 from math import exp
 from random import seed
 from random import random
@@ -125,17 +125,13 @@ def train(globalSettings):
 	epochs = 500
 
 	# 4 x n + n x 
-
 	print("Network is training...")
 	seed(1)
-
 	dataset = import_data(globalSettings.importedFilePath, 0)
 	n_inputs = len(dataset[0][0]) - 1
 	n_outputs = len(set([row[-1] for row in dataset[0]]))
 	network = initialize_network(n_inputs, globalSettings.nodes, n_outputs)
-
 	for i in range(0, 10, 1):
 		dataset = import_data(globalSettings.importedFilePath, i)
 		train_network(network, dataset[0], globalSettings.learningRate, epochs, n_outputs)
-
 	return network

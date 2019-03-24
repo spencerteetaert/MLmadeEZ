@@ -24,13 +24,9 @@ def import_data(address, start):
 					inputElem += [float(rowElem[j])]  # try to cast to float if possible
 				except:
 					continue
-
 			ret += [inputElem + [list(outputs.values()).index(rowElem[len(rowElem) - 1])]]
-
 		print([ret] + [outputs])
 		return [ret] + [outputs]
-
-	#biases = find_max_min(values)
 
 	# Returns first 50 pieces of consecutive data
 	for i in range(min(start*50, len(values) - 50), min(start*50 + 50, len(values)), 1):
@@ -44,14 +40,9 @@ def import_data(address, start):
 					count = count + 1
 			try:
 				inputElem += [float(rowElem[j])]
-				#print("input: #",inputElem[-1])
 			except:
-				#print("none float found")
 				continue
 
 		ret += [inputElem + [list(outputs.values()).index(rowElem[len(rowElem) - 1])]]
-
-	#print(ret)
 	print("training:",[ret] + [outputs])
 	return [ret] + [outputs]
-	#print(values)
