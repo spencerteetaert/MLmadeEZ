@@ -142,7 +142,7 @@ class DataStorage:
         return True
     
     def update_layers(self, numberOfLayer):
-        self.layers = numberOfLayer
+        self.epochs = numberOfLayer
         return True
     
     def update_nodes(self, numberOfNodes):
