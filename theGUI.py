@@ -133,7 +133,7 @@ class Window():
         
         to_user = nn.test_bridge(ins)
         print("Predicted output:",to_user)
-        print("Correct output:", ins[-1])
+        #print("Correct output:", ins[-1])
         return True
 
 class UserFileInput():
