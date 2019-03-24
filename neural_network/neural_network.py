@@ -107,20 +107,10 @@ def bridge(globalSettings):
 	train_network(network, trainingData[0], globalSettings.learningRate, globalSettings.epochs, n_outputs)	
 	print("Network training success")
 	#print(network)
-
-	#print("dataset:",dataset)
-	testDataSet = import_test_data(globalSettings.importedFilePath, trainingData[1])
-	count = 0
-	for i in range(0, len(testDataSet[0]), 1):		
-		if (trainingData[1][testDataSet[0][i][len(testDataSet[0][i])-1]] == test(network, testDataSet[0][i], trainingData)):
-			count = count + 1
-
-	print("Epochs:", globalSettings.epochs)
-	print("Hidden nodes:", globalSettings.nodes)
-	print("Learning rate:", globalSettings.learningRate)
-	print(round(count/len(testDataSet[0])*100, 2), "% success rate")
-
-	return network
+	a.set_network(network)
+	a.set_training_data(trainingData)
+	
+	return True
 
 def test(network, testData, trainingData):
 	outputs = forward_propagate(network, testData)
@@ -131,3 +121,21 @@ def test(network, testData, trainingData):
 	#print(trainingData[1][testData[len(testData)-1]], trainingData[1][current[1]])
 
 	return trainingData[1][current[1]]
+
+def test_bridge(data):
+	return test(a.get_network(), data, a.get_training_data())
+
+class dataClass:
+	def __init__(self):
+		self.network = 0
+		self.trainingData = 0
+	def set_network(self, value):
+		self.network = value
+	def get_network(self):
+		return self.network
+	def set_training_data(self, value):
+		self.trainingData = value
+	def get_training_data(self):
+		return self.trainingData
+
+a = dataClass()
