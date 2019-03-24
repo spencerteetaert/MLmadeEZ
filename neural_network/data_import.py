@@ -13,8 +13,8 @@ def import_data():
 			inputElem += [float(rowElem[i])]
 
 			if (i == len(rowElem)-2):
-				if not (rowElem[i+1] in outputs):
-					outputs[rowElem[i+1]] = count 
+				if not (rowElem[i+1] in outputs.values()):
+					outputs[count] = rowElem[i+1]
 					count = count + 1
 
 		ret += [inputElem + [count-1]]
