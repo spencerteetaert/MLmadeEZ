@@ -6,10 +6,12 @@ import numpy
 def import_data(address, start):
 	file = open(address, "r")
 	values = file.read().split('\n')
+
 	ret = []  # list of all elements 
 	outputs = {}  # output dict
 	count = 0  # tracking output nodes
-	if(start == True): #Returns 100 random pieces of data
+
+	if(start == -1): #Returns 100 random pieces of data
 		for i in range(0, 100, 1):
 			inputElem = []
 			rowElem = values[randint(0, len(values)-1)].split(',')
@@ -50,6 +52,6 @@ def import_data(address, start):
 		ret += [inputElem + [list(outputs.values()).index(rowElem[len(rowElem) - 1])]]
 
 	#print(ret)
-	print([ret] + [outputs])
+	print("training:",[ret] + [outputs])
 	return [ret] + [outputs]
 	#print(values)
