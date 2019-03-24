@@ -14,6 +14,10 @@ def import_data(address, start):
 
 	if(start == -1): #Returns 100 random pieces of data
 =======
+	ret = []  # list of all elements 
+	outputs = {}  # output dict
+	count = 0  # tracking output nodes
+	if(start == True): #Returns 100 random pieces of data
 >>>>>>> 19be8804753c1b872dbf107ae5417616ff5fd0be
 		for i in range(0, 100, 1):
 			inputElem = []
